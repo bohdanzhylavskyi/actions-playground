@@ -18,10 +18,14 @@ jobs:
         with:
           node-version: 16.13.x
 
+      - name: npm ci
+        run: npm ci
+
       - name: Test
         run: npm run test:ci
 
   build:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,6 +35,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.13.x
+
+      - name: npm ci
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -42,12 +49,14 @@ jobs:
           path: build
 
   report:
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: build
 
       - name: Show artifact
         run: ls build
