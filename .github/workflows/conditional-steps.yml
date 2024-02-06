@@ -1,0 +1,24 @@
+name: Build with debug
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Debug'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building..."
+      - if: ${{inputs.debug}}
+        run: echo "Debug step"
+
+  debug:
+    if: ${{inputs.debug}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Debug job"
