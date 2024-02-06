@@ -1,0 +1,27 @@
+name: Workflow commands
+
+on: [workflow_dispatch]
+
+jobs:
+  environments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set variable
+        run: echo "myvar=value" >> "$GITHUB_ENV"
+      - name: Read variable
+        run: echo $myvar
+
+  output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set output
+        id: step1
+        run: echo "out=value" >> "$GITHUB_OUTPUT"
+      - name: Read output
+        run: echo ${{ steps.step1.outputs.out }}
+
+  error:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show error
+        run: echo "::error::Something went wrong"
