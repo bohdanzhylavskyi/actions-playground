@@ -1,4 +1,4 @@
-name: Workflow to run for one or more events
+name: Deploy by assigning labels
 
 on:
   pull_request:
