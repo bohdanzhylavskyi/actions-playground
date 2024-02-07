@@ -14,17 +14,18 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports:
-          - 6379:6380
+          - 6379:6379
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - run: npm i redis
       - run: node redis-client.js
         env:
           REDIS_HOST: localhost
-          REDIS_PORT: 6380
+          REDIS_PORT: 6379
   job-in-container:
     runs-on: ubuntu-latest
     container: node:10.18-jessie
@@ -37,7 +38,9 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: action/checkout@v4
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: npm i redis
       - run: node redis-client.js
         env:
           REDIS_HOST: red
