@@ -1,0 +1,29 @@
+name: Deployment To Envs
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploymentEnv:
+        type: choice
+        description: Target Deployment
+        required: true
+        options:
+          - dev
+          - production
+
+jobs:
+  deploy_dev:
+    if: ${{ inputs.deploymentEnv == 'dev' }}
+    runs-on: ubuntu-latest
+    environment:
+        name: dev
+    steps:
+      - run: echo "Deploying to dev"
+
+  deploy_prod:
+    if: ${{ inputs.deploymentEnv == 'production' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - run: echo "Deploying to prod"
