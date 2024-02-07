@@ -28,7 +28,7 @@ jobs:
           REDIS_PORT: 6379
   job-in-container:
     runs-on: ubuntu-latest
-    container: node:10.18-jessie
+    container: node:14.16
     services:
       red:
         image: redis
@@ -39,7 +39,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - run: npm i redis
       - run: node redis-client.js
         env:
