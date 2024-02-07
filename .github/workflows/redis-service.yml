@@ -1,0 +1,44 @@
+name: Workflow with Redis service
+
+on: [workflow_dispatch]
+
+jobs:
+  job-on-host:
+    runs-on: ubuntu-latest
+    services:
+      red:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6380
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: node redis-client.js
+        env:
+          REDIS_HOST: localhost
+          REDIS_PORT: 6380
+  job-in-container:
+    runs-on: ubuntu-latest
+    container: node:10.18-jessie
+    services:
+      red:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: action/checkout@v4
+      - run: node redis-client.js
+        env:
+          REDIS_HOST: red
+          REDIS_PORT: 6379
