@@ -1,0 +1,25 @@
+name: Github Token
+
+on: [workflow_dispatch]
+
+jobs:
+  create-issue-failed:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: read
+    steps:
+      - name: create an issue
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: create an issue
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
