@@ -1,4 +1,7 @@
 ![Pipeline](https://github.com/bohdanzhylavskyi/actions-playground/actions/workflows/default.yml/badge.svg)
+![Default Branch pipeline](https://github.com/bohdanzhylavskyi/actions-playground/actions/workflows/default.yml/badge.svg)
+
+[![Default Branch pipeline](https://github.com/bohdanzhylavskyi/actions-playground/actions/workflows/default.yml/badge.svg)](https://github.com/bohdanzhylavskyi/actions-playground/actions/workflows/default.yml)
 
 # Getting Started with Create React App
 
