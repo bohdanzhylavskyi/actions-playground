@@ -1,0 +1,16 @@
+name: "no action"
+
+description: "no action description"
+
+inputs:
+  ainput:
+    required: true
+    default: 'default-action-input'
+
+outputs:
+  aoutput:
+    description: 'Result of no action'
+
+runs:
+  using: "node18"
+  main: "main.js"

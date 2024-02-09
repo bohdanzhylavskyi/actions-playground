@@ -1,0 +1,20 @@
+name: Usage of JS Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      workflowInput:
+        required: true
+        type: string
+        description: Input
+
+
+jobs:
+  usage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: .github/actions/no-action
+        id: noaction
+        with:
+          ainput: ${{ inputs.workflowInput }}
+      - run: echo "${{ steps.noaction.outputs.aoutput }}"
