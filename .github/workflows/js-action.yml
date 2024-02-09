@@ -13,7 +13,8 @@ jobs:
   usage:
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/actions/no-action
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/no-action
         id: noaction
         with:
           ainput: ${{ inputs.workflowInput }}

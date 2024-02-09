@@ -12,5 +12,5 @@ outputs:
     description: 'Result of no action'
 
 runs:
-  using: "node18"
+  using: "node16"
   main: "main.js"
