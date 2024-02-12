@@ -7,23 +7,26 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [10, 12, 14]
+        version: [16, 18, 20]
         include:
-          - version: 14
+          - version: 16
             experimental: true
       max-parallel: 1
+    outputs:
+      vers: ${{ steps.setresult.outputs.vers }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.version }}
-      - run: echo "${{ matrix.version }} - ${{ matrix.experimental || '_' }}"
+      - run: echo "${{ matrix.version }} - ${{ matrix.experimental }}"
       - run: npm ci
       - run: npm run test:ci
       - run: echo "vers=${{matrix.version}}" >> "$GITHUB_OUTPUT"
+        id: setresult
 
   report:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - run: echo "${needs.test.outputs.vers}"
+      - run: echo "${{needs.test.outputs.vers}}"
