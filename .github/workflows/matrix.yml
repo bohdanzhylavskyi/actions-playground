@@ -1,0 +1,29 @@
+name: Matrix
+
+on: [workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [10, 12, 14]
+        include:
+          - version: 14
+            experimental: true
+      max-parallel: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+      - run: echo "${{ matrix.version }} - ${{ matrix.experimental || '_' }}"
+      - run: npm ci
+      - run: npm run test:ci
+      - run: echo "vers=${{matrix.version}}" >> "$GITHUB_OUTPUT"
+
+  report:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - run: echo "${needs.test.outputs.vers}"
