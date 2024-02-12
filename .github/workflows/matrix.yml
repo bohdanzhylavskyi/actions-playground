@@ -19,6 +19,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.version }}
+          cache: 'npm'
       - run: echo "${{ matrix.version }} - ${{ matrix.experimental }}"
       - run: npm ci
       - run: npm run test:ci
