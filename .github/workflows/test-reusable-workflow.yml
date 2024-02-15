@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/reuse/reusable-workflow.yml
+    uses: ./.github/workflows/reusable-workflow.yml
     with:
       name: ${{ inputs.name }}
 
