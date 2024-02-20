@@ -6,4 +6,4 @@ jobs:
   echo:
     runs-on: [self-hosted, msep]
     steps:
-      - echo "Job on MSEP"
+      - run: echo "Job on MSEP"
