@@ -1,0 +1,9 @@
+name: Self-hosted Runner
+
+on: [workflow_dispatch]
+
+jobs:
+  echo:
+    runs-on: [self-hosted, msep]
+    steps:
+      - echo "Job on MSEP"
