@@ -1,0 +1,14 @@
+name: Usage of action from separate organization repository
+
+on: [workflow_dispatch]
+
+jobs:
+  usage:
+    runs-on: ubuntu-latest
+    steps:
+      - id: zhybo
+        uses: bohdanzhylavskyi/gh-action-zhybo@main
+        with:
+          who-to-greet: "Bohdan"
+
+      - run: echo ${{ steps.zhybo.outputs.random-number }}
